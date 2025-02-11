@@ -1,9 +1,8 @@
 
 # WordCount-Using-MapReduce-Hadoop
 
-This repository is designed to test MapReduce jobs using a simple word count dataset. According to the assignement we need to complete the map, reduce and controller files of java so that when we use these file in hadoop they will perform those actions and provide us with count of each word in the text we give in the input text file which is database in real world scenerio.
+This repository is designed to test MapReduce jobs using a simple word count dataset.
 
-I have added my experience below the each section how i have gone through.
 
 ## Objectives
 
@@ -125,3 +124,77 @@ To copy the output from HDFS to your local machine:
     ```
     Copied the output back to our system in same way as docker in between.
 3. Commit and push to your repo so that we can able to see your output
+
+## Project overview
+
+The main goal of the assignement is we need to complete the map, reduce and controller files of java so that when we use these file in hadoop they will perform those actions and provide us with count of each word in the text we give in the input text file which is database in real world scenerio.
+
+I have added my experience below the each section how i have gone through.
+
+## Approach and Implementation
+
+### **Approach and Implementation**
+
+#### **Mapper Logic (`WordMapper.java`)**
+The Mapper is responsible for processing the input text file line by line, breaking each line into words, and emitting `(word, 1)` pairs.
+
+1. **Tokenization**: Each line is split into words using space or non-word characters.
+2. **Emit Key-Value Pairs**: Each word is emitted with an initial count of `1`.
+
+
+---
+
+#### **Reducer Logic (`WordReducer.java`)**
+The Reducer takes the `(word, 1)` pairs from the Mapper, aggregates the counts for each word, and emits `(word, total_count)`.
+
+1. **Grouping by Key**: Hadoop ensures all values for the same key (word) are grouped together.
+2. **Summation**: The reducer sums up all occurrences of each word.
+3. **Emit Final Word Count**.
+
+
+---
+
+#### **Driver Program (`Controller.java`)**
+The Driver sets up and configures the job, specifying:
+- **Input format** (Text files)
+- **Mapper and Reducer classes**
+- **Output format** (Word with its count)
+
+
+---
+
+### **Execution Steps**
+
+Followed the above steps and have written about each step below them.
+---
+
+### **Challenges Faced & Solutions**
+| **Challenge** | **Solution** |
+|--------------|-------------|
+| **Import was missing** | Imported `StringTokenizer`. |
+
+
+---
+
+### **Sample Input & Output**
+
+#### **Sample Input (`input.txt`)**
+```
+Hello world
+Hello Hadoop
+Hadoop is powerful
+Hadoop is used for big data
+```
+
+#### **Expected Output**
+```
+Hadoop 3
+Hello 2
+is 2
+used 1
+for 1
+big 1
+data 1
+powerful 1
+world 1
+```
