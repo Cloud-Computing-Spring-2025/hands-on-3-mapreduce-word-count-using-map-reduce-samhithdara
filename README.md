@@ -1,7 +1,9 @@
 
 # WordCount-Using-MapReduce-Hadoop
 
-This repository is designed to test MapReduce jobs using a simple word count dataset.
+This repository is designed to test MapReduce jobs using a simple word count dataset. According to the assignement we need to complete the map, reduce and controller files of java so that when we use these file in hadoop they will perform those actions and provide us with count of each word in the text we give in the input text file which is database in real world scenerio.
+
+I have added my experience below the each section how i have gone through.
 
 ## Objectives
 
@@ -13,6 +15,8 @@ By completing this activity, students will:
 4. **Work with Docker Containers:** Understand how to use Docker to run and manage Hadoop components and transfer files between the host and container environments.
 5. **Analyze MapReduce Job Outputs:** Learn how to retrieve and interpret the results of a MapReduce job.
 
+Objective is clear as i explained in the top section.
+
 ## Setup and Execution
 
 ### 1. **Start the Hadoop Cluster**
@@ -22,6 +26,7 @@ Run the following command to start the Hadoop cluster:
 ```bash
 docker compose up -d
 ```
+This is command that is used to run docker container by using yaml as config here we are using hadoop env file as well.
 
 ### 2. **Build the Code**
 
@@ -30,6 +35,7 @@ Build the code using Maven:
 ```bash
 mvn install
 ```
+As explained maven is used to build package.
 
 ### 3. **Move JAR File to Shared Folder**
 
@@ -62,6 +68,7 @@ Access the Hadoop ResourceManager container:
 ```bash
 docker exec -it resourcemanager /bin/bash
 ```
+Above we moved files we need to hadoop as a hop on docker now connecting to docker container.
 
 Navigate to the Hadoop directory:
 
@@ -90,6 +97,7 @@ Run your MapReduce job using the following command:
 ```bash
 hadoop jar /opt/hadoop-3.2.1/share/hadoop/mapreduce/<your-jar-file>.jar com.example.controller.Controller /input/dataset/input.txt /output
 ```
+Here we replaced the jar file name with our jar file and executing the controller with input text file and outpur folder to store the output as parameters for controller file.
 
 ### 9. **View the Output**
 
@@ -115,4 +123,5 @@ To copy the output from HDFS to your local machine:
     ```bash
     docker cp resourcemanager:/opt/hadoop-3.2.1/share/hadoop/mapreduce/output/ shared-folder/output/
     ```
+    Copied the output back to our system in same way as docker in between.
 3. Commit and push to your repo so that we can able to see your output
